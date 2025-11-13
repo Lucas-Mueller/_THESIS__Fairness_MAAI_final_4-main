@@ -1,0 +1,153 @@
+\documentclass[12pt,oneside]{article}
+\usepackage{float}
+\usepackage{enumerate}  
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{a4wide}
+\usepackage{palatino}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[ngerman, english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[bookmarks]{hyperref}
+\usepackage[justification=centering]{caption}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage[a4paper,left=3cm, right=3cm, top=3cm, bottom=4cm]{geometry}
+\usepackage{natbib}
+\usepackage{csquotes}
+\setlength{\parindent}{0em} 
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+\usepackage{xurl}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\setlength{\headheight}{16pt}
+
+\titlespacing*{\section}
+{0pt}{3.5ex plus 1ex minus .2ex}{.2ex plus .2ex}
+\titlespacing*{\subsection}
+{0pt}{1.5ex plus 1ex minus .2ex}{.2ex plus .2ex}
+\titlespacing*{\subsubsection}
+{0pt}{1.5ex plus 1ex minus .2ex}{.2ex plus .2ex}
+
+
+%%% Begin Packages for the table %%%
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{pbox}
+\usepackage{rotating}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{enumitem}
+\usepackage{nth}
+\usepackage{cleveref}
+
+\renewcommand{\arraystretch}{1.25} 
+
+\usepackage{pdfrender}
+\newcommand*{\boldcheckmark}{%
+  %\textpdfrender{
+    %TextRenderingMode=FillStroke,
+    %LineWidth=.5pt, % half of the line width is outside the normal glyph
+  %}{\checkmark}%
+  {\normalsize\checkmark}
+}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\nmark}{\ding{109}}%
+
+%%% End Packages for the table %%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  begin of the document  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\pagenumbering{roman}
+
+%% Cover %%
+\input{90_Cover}
+
+\thispagestyle{empty} % Remove numbering for page
+
+%% Abstract %%    
+\input{00_Abstract}
+
+\clearpage
+\thispagestyle{empty} % Remove numbering for page
+
+\input{91_Affirmation}
+
+\clearpage
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+% Table of Contents %%
+\tableofcontents
+\clearpage
+
+\setlength{\parskip}{0.5em} 
+
+\input{10_Abbreviations}
+
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{section}{List of Figures} %include in toc w/o numbering
+\listoffigures
+
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{section}{List of Tables} %include in toc w/o numbering
+\listoftables
+
+\clearpage
+
+\pagenumbering{arabic}  
+    \setcounter{page}{1} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Main part -- include you sections here %%
+
+\input{01_Introduction}
+\input{02_Background}
+\input{03_Methodology}
+\input{04_Results}
+\input{05_Discussion}
+\input{06_Conclusion}
+
+% End main part
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+%\appendix
+%\input{07_Appendix}
+
+\clearpage
+
+%% Bibliography %%
+\bibliographystyle{apalike}
+\bibliography{references.bib}
+
+\end{document}

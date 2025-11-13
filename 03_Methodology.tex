@@ -1,0 +1,332 @@
+\newpage
+\section{Research Design}
+\label{sec:methodology}
+This chapter presents how the original position was experimentally tested by \citet{Frohlich_Oppenheimer_1992_Book} before outlining its adoption in a MAAI separated between the procedure and the technical implementation. Subsequently, the exact statistical procedure employed to test the hypotheses of this thesis is presented.
+
+\subsection{Baseline Experiment by Frohlich and Oppenheimer}
+\label{sec:Adoption_Frohlich_MAAI}
+
+\citet{Frohlich_Oppenheimer_1992_Book} conducted their main experiment with 34 groups of five university students and comprises two phases: the individual phase and the group phase. In the individual phase, participants first receive a brief explanation in booklet form, which \citet{Frohlich_Oppenheimer_1992_Book} provide in their appendix, describing four candidate principles of distributive justice: 
+\begin{enumerate}
+    \item \textbf{Maximizing the floor income}: The most just distribution of income is that which maximizes the floor (or lowest) income in the society. This principle considers only the welfare of the worst-off individual in society. In judging among income distributions, the distribution that ensures the poorest person the highest income is the most just. No person's income can go up unless it increases the income of the people at the very bottom.
+     \item \textbf{Maximizing the average income}: The most just distribution of income is that which maximizes the average income in the society. For any society maximizing the average income maximizes the total income in the society.
+     \item\textbf{Maximizing the average with a floor constraint of X\$}: The most just distribution of income is that which maximizes the average income only after a certain specified minimum income is guaranteed to everyone.
+     \item\textbf{Maximizing the average with a range constraint of X\$}: The most just distribution of income is that which attempts to maximize the average income only after guaranteeing that the difference between the poorest and the richest individuals (i.e., the range of income) in the society is not greater than a specified amount.
+\end{enumerate}
+The principle Maximizing the floor income is based on the philosophy of John Rawls and is based on his conception of the difference principle that states that inequalities are only permissible if they benefit the least advantaged. 
+
+After the participants read the four justice principle they then provide an initial rank-ordering of the four principles from most to least favored and report confidence on a discrete scale (Very unsure, Unsure, No opinion, Sure, Very sure).
+
+A \textbf{detailed explanation} follows. Participants are shown ``society'' payoffs as five income classes under four alternative distributions, reproduced in Table~\ref{Tab:Distribution_Table}. They are also told that for this set of distributions explicit probabilities to be assigned to each class: \emph{high} (5\%), \emph{medium-high} (10\%), \emph{medium} (50\%), \emph{medium-low} (25\%), and \emph{low} (10\%). 
+\begin{table}[!ht]
+\centering
+\caption[Five-class distributions for four alternatives]{Five-class distributions for four alternatives (orientation step). Entries denote household income units used solely for payoff conversion in the baseline experiment by \citet{Frohlich_Oppenheimer_1992_Book}.}
+\begin{tabular}{lrrrr}
+\toprule
+Class & A & B & C & D \\
+\midrule
+Upper & 32{,}000 & 28{,}000 & 31{,}000 & 21{,}000 \\
+Upper--middle & 27{,}000 & 22{,}000 & 24{,}000 & 20{,}000 \\
+Middle & 24{,}000 & 20{,}000 & 21{,}000 & 19{,}000 \\
+Lower--middle & 13{,}000 & 17{,}000 & 16{,}000 & 16{,}000 \\
+Lower & 12{,}000 & 13{,}000 & 14{,}000 & 15{,}000 \\
+\addlinespace
+Average & 20{,}750  & 19{,}150  & 19{,}850 & 18{,}050 \\
+Floor (lowest) & 12{,}000 & 13{,}000 & 14{,}000 & 15{,}000 \\
+Spread (upper minus lower) & 20{,}000 & 15{,}000 & 17{,}000 & 6{,}000 \\
+\bottomrule
+\label{Tab:Distribution_Table}
+\end{tabular}
+\end{table}
+
+This is followed by an explanation of which distribution would correspond to each justice principle. In this case, this would be the following:
+\begin{itemize}
+    \item \textbf{Maximizing the floor income}: Distribution D
+     \item \textbf{Maximizing the average income}: Distribution B
+     \item\textbf{Maximizing the average with a floor constraint of X\$}:
+     \begin{itemize}
+         \item If X <= 12,000\$ : Distribution A 
+         \item If X <= 13,000\$ : Distribution B 
+         \item If X <= 14,000\$ : Distribution B 
+         \item If X <= 15,000\$ : Distribution D
+     \end{itemize}
+     \item\textbf{Maximizing the average with a range constraint of X\$}:
+     \begin{itemize}
+         \item If X >= 20,000\$ : Distribution A 
+         \item If X >= 17,000\$ : Distribution C
+         \item If X >= 15,000\$ : Distribution B 
+     \end{itemize}
+\end{itemize}
+
+
+Subsequently, the participants read more on the principles before taking a short test on them that they had to pass. Then they had to rank the principles again in the exact same manner as before. Next, they engage with the principles in payoff-relevant practice rounds: given a distribution table of the form shown in Table~\ref{Tab:Distribution_Table}, participants choose one of the four principles; the corresponding distribution is then implemented. Implementation proceeds by a random draw that assigns the participant to one of five payoff categories; the participants are unaware of the precise probabilities for each class. The draw is in the form of a chit similar to Figure~\ref{fig:Chit_Example}. The chit presents the realized payoff and the counterfactual amounts they would have received under the other principles. Realized payoffs are converted at a 1:\$10{,}000 scale and paid immediately. This procedure is repeated four times. Once finished, a third ranking with confidence concludes the individual phase.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Figures/Chit_Example.png}
+    \caption[Example chit from \citet{Frohlich_Oppenheimer_1992_Book}]{Example chit from \citet{Frohlich_Oppenheimer_1992_Book}. Participants receive information about their income class assignment and the payoffs they would receive under each distributive justice principle.}
+    \label{fig:Chit_Example}
+\end{figure}
+
+In the group phase, the five participants deliberate to reach unanimous agreement on one principle. They may also propose a new principle, though \citet{Frohlich_Oppenheimer_1992_Book} report that groups did not do so. Before discussion starts, two clarifications are read aloud: (i) the payoff distributions used for group payment may differ from those in the examples, and (ii) the stakes are higher because the group’s decision will determine the binding payoff rule. Importantly, unlike the individual practice, participants do not know which concrete distributions will later be used; they therefore cannot condition on a targeted distributional profile. Discussion must last at least five minutes and culminate in a verbal consensus and a confirming secret-ballot vote. If unanimity fails, payoffs are assigned by a random draw from a randomly selected distribution. After payment assignment, participants submit a final ranking with a confidence rating. 
+
+\subsection{MAAI Replication of Frohlich and Oppenheimer}
+\label{sec:Replication_MAAI_Process}
+
+The core experimental design of \citet{Frohlich_Oppenheimer_1992_Book} is replicated in a MAAI, adapting procedures where necessary to accommodate operational constraints of AI agents while preserving informational structure and incentive alignment. The original procedure of \citet{Frohlich_Oppenheimer_1992_Book} and the MAAI replication are summarized in  \Cref{tab:Frohlich_Oppenheimer_vs_MAAI_procedure}. 
+
+\begin{table}[!ht]
+\centering
+\caption[Comparison of baseline and MAAI implementation]{\citet{Frohlich_Oppenheimer_1992_Book} procedure compared to MAAI implementation. Key modifications include the replacement of physical materials with digital interfaces and the adaptation of timing constraints for asynchronous LLM processing.}
+\label{tab:Frohlich_Oppenheimer_vs_MAAI_procedure}
+\small
+\setlength{\tabcolsep}{3.5pt}
+
+% --- Vertical padding ---
+\begingroup
+\setlength{\extrarowheight}{1.8pt} % extra space above each row
+\renewcommand{\arraystretch}{1.3}  % scale line height within cells
+% ------------------------
+
+\begin{tabular}{|>{\centering\arraybackslash}m{1.0cm}|%
+                >{\raggedright\arraybackslash}p{2.5cm}|%
+                >{\raggedright\arraybackslash}p{5.6cm}|%
+                >{\raggedright\arraybackslash}p{4.5cm}|}
+\hline
+\textbf{Phase} & \textbf{Step} & \textbf{\citet{Frohlich_Oppenheimer_1992_Book}} & \textbf{MAAI replication} \\
+\hline
+\multirow[c]{7}{*}[-10.ex]{\rotatebox[origin=c]{90}{\textbf{Individual phase}}}
+& Brief explanation & Booklet introducing four distributive-justice principles. & Identical. \\
+\cline{2-4}
+& Ranking & Rank the principles; record confidence (5-point scale). & Identical. \\
+\cline{2-4}
+& Detailed explanation & Example economic distribution \& application of principles. & Identical. \\
+\cline{2-4}
+& Short test & Comprehension test; progression conditional on passing. & Omitted (AI agents reliably apply the rules). \\
+\cline{2-4}
+& Engage with principles ($\times4$) & Distribution is shown; principle is chosen, random draw assigns class; actual pay 1:\$10{,}000. & Identical, necessary assumptions made. \\
+\cline{2-4}
+& Ranking & Rank the principles; record confidence (5-point scale). & Identical. \\
+\cline{2-4}
+\hline
+\multirow[c]{4}{*}[-10ex]{\rotatebox[origin=c]{90}{\textbf{Group phase}}}
+& Pre-discussion clarifications & Group-payment distributions may differ; higher stakes; actual set concealed. & Identical. \\
+\cline{2-4}
+& Group deliberation & Unstructured discussion with unlimited time. & Fixed number of rounds; equal speaking turns; no novel principles. \\
+\cline{2-4}
+& Decision process & Verbal consensus with secret-ballot confirmation; if not unanimous $\to$ random draw from random distribution. & Identical. \\
+\cline{2-4}
+& Ranking & Rank the principles; record confidence (5-point scale). & Identical. \\
+\hline
+\end{tabular}
+\endgroup
+\end{table}
+
+In the individual phase, each AI agent is first initialized with a defined name, persona, payment account, memory store, and model parameters. The AI agents then receive the same instructions as human participants, including the descriptions of the four distributive justice principles, and submit an initial rank-ordering with a confidence score on the same discrete scale. This is followed by the detailed explanation step, using the same reference distributions as in Table~\ref{Tab:Distribution_Table}. A single procedural deviation is introduced: the comprehension test administered to human participants is omitted, as preliminary trials showed that AI agents consistently interpreted and applied the principles correctly. 
+
+Then the AI agents engage with the principle as in the same way as in original experiment: AI agents select one of the four principles for a given distribution table, after which the corresponding distribution is implemented via a simulated random draw assigning the AI agent to one of five income classes. The ``chit'' shown in Figure~\ref{fig:Chit_Example} is presented in text form, containing the realized payoff and counterfactual payoffs under the other principles. As in the human experiment, payoffs are converted at a 1:\$10{,}000 scale and settled immediately. The procedure is repeated four times, after which the AI agents provide a third ranking with confidence.
+
+A necessary adaptation concerns the derivation of class probabilities for each distribution set. In the original design, each set of four distributions shares a common probability vector across classes, allowing the computation of average incomes. For two of the four sets, a unique non-negative probability vector could be inferred; for one set, multiple feasible vectors existed within a narrow range, from which one was selected at random. For the remaining set, no non-negative solution satisfied all constraints, indicating that the backend probabilities in the original experiment diverged from the printed averages. In this case, the displayed average remained unchanged but in implementation of the MAAI a set was chosen that was consistent for all distributions and non-negative, resulting in a slight deviation of the displayed average and the true average of \$26.97.  
+
+In the group phase, AI agents receive the same clarifications as human participants: that the payoff distributions used for group payment are significantly higher than those presented earlier, that the set of distribution is a secret, and that their collective choice will be binding. Since \citet{Frohlich_Oppenheimer_1992_Book} do not provide the final set of distributions, an assumption was made. Group discussion then proceeds in discrete, fixed-length rounds. Several deviations have been made in this phase. The discussion is structured into a fixed number of rounds to prevent deadlocked exchanges from continuing indefinitely and incurring unnecessary execution costs. Unlike human conversation—where participants may interrupt, employ gestures, vary intonation, or use facial expressions—AI agents are limited to textual conversation. Each AI agent is granted exactly one speaking opportunity per round, ensuring equal participation, which is not necessarily the case in human discussions. Furthermore, AI agents are not able to introduce novel principles. This design choice reflects both the technical challenges and brittleness such functionality would entail, and the fact that human participants in \citet{Frohlich_Oppenheimer_1992_Book} did not make use of this option. Aside from these deviations, the discussion follows the original format, concluding with a secret-ballot vote. The final outcome is then determined and communicated to the AI agents, after which they submit a last ranking of the principles.
+
+
+
+
+\subsection{Technical Architecture}
+\subsubsection{Overall Architecture}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Figures/Architecture_black.png}
+    \caption[System architecture of the experimental artefact]{System architecture of the experimental artefact. A service-oriented design separates two layers to support reuse, fault isolation, and manage complexity.}
+    \label{fig:MAAI_Architecture}
+\end{figure}
+This section presents the technical architecture of the software artefact developed to empirically test the hypothesis of this thesis. The complete source code is available in a public repository \citep{Mueller_2025_Rawls_Github_Repo}. The design follows four guiding principles: modularity, flexibility, simplicity, and transparency.
+
+The artefact is implemented in the Python programming language (version 3.9+), while the statistical analysis is conducted in Jupyter Notebooks. The statistical analysis is discussed separately and is detailed in \Cref{sec:Statistical_Testing}. Python was selected because it is a high level programming language, simple to understand, and widely adopted across academic and industrial domains, particularly within AI applications, which fueled its rise to the most utilized programming language on GitHub~\cite{Github_2024_Survey}. 
+
+The architecture adopts a service-oriented paradigm to decouple responsibilities behind clear interfaces. This choice improves modularity and component reuse, simplifies maintenance and testing, and contains faults within service boundaries~\citep{Niknejad_et_al_2020_Service_Oriented}. The core of the artefact consists of two service layers, which are depicted in \Cref{fig:MAAI_Architecture}: the Orchestration Layer and AI Agent Management Layer. The complete system accepts a YAML-based configuration file as input and produces comprehensive JSON-formatted log files containing all AI agent interactions, textual communications, decision traces, and experimental outcomes. This input-output design enables reproducible experimental execution while maintaining complete observability of AI agent behaviors throughout the experimental process.
+
+
+\subsubsection{Orchestration Layer}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figures/Orchestarion_Layer.png}
+    \caption[Example configuration of an experimental run]{Example configuration of an experimental run. All available parameters are shown with example values, including language settings, LLM selection, agent definitions, temperature parameters, and income distribution specifications.}
+    \label{fig:MAAI_Architecture_Experiment}
+\end{figure}
+The Orchestration Layer, depicted in \Cref{fig:MAAI_Architecture_Experiment}, constitutes the hierarchical management architecture designed to coordinate the experimental workflow while maintaining strict separation of concerns between the two experimental phases.
+
+The Experiment Manager is the top-level controller. It initializes the agents, manages logging, mediates transitions between phases, and maintains experiment state via context objects with clearly defined interfaces to the phase managers. This approach was chosen to separate the phase-specific execution from overarching execution logic, improving modularity and flexibility. 
+
+The Phase 1 Manager orchestrates the execution of the individual phase (Phase 1). This phase is conducted in parallel to reduce total experiment execution time compared to sequential processing. The Phase 1 and Phase 2 Managers assume the role of the "Experiment Leader" in the original human study~\citep{Frohlich_Oppenheimer_1992_Book}. The Phase 1 Manager guides participant agents through the tasks described in \Cref{sec:Adoption_Frohlich_MAAI}, validates responses with the support of utility agents, updates balances, serves distributions, manages memory processes, and handles errors according to the configuration file. Once all participant agents complete the individual phase, control returns to the Experiment Manager, which then activates the Phase 2 Manager.
+
+The Phase 2 Manager orchestrates the group phase (\Cref{sec:Replication_MAAI_Process}). Because this phase requires sequential interaction, agents discuss in rounds. Each round begins with a randomized speaking order, constrained so that each agent speaks exactly once and no agent speaks twice consecutively. The speaking order is randomized so that no AI agent has a consistent advantage from their speaking position. In each round, the AI agent first receives a transcript of the preceding discussion. This ensures that the AI agent is informed about the current state of the discussion, similar to how human participants in the experiment of \citet{Frohlich_Oppenheimer_1992_Book} hear each other. Every agent receives a transcript of the preceding discussion to maintain shared context, mirroring the human experiment. If reasoning is enabled in the configuration, this is followed by a Chain of Thought (CoT) call, in which the AI agent is prompted to strategically review the current situation and create an assessment. CoT reasoning has been implemented because it improves the performance of non-reasoning LLMs like GPT-4o in logical assessments of situations~\citep{Sprague_etal_2024_CoT}. The resulting assessment is then fed into the next call to the same AI agent, which is otherwise the same if reasoning is disabled. In this prompt, the AI agent is asked to make a statement to the group and choose whether to propose a formal vote or not. Here, the ``public'' statement and private information are separated through prompt design in order to allow the AI agent to explicitly control its communication with the group. After each AI agent made their statement they are asked whether they want to initiate a vote or not; if one AI agent answers yes the other AI agents must confirm unanimously. If that is the case, the group conducts a secret vote. If consensus is reached, the discussion ends and the payoffs are assigned as described in \Cref{sec:Adoption_Frohlich_MAAI}, which is conducted by the Phase 2 Manager by invoking the appropriate function. If no consensus is reached after the maximum rounds have been completed, the Phase 2 Manager randomly assigns the payoffs as described in \Cref{sec:Adoption_Frohlich_MAAI}. Subsequently, the bank balance is updated and the AI agents conduct a final ranking of preferences.
+
+Because this thesis evaluates the role of input language, the experiment can be conducted in Mandarin, Spanish, and English. The Language Manager ensures the correct language setting for each run. English prompts serve as the primary template, which are centrally translated into Spanish and Mandarin and stored in a shared repository. These are translated from the English prompts using DeepL, which shows high performance in translating from English to Mandarin and from English to Spanish, particularly in preserving meaning when translating into Mandarin~\citep{Chen_etal_2025_Translation}. During execution, the phase managers retrieve the appropriate translations dynamically. This architecture promotes modularity, maintains consistency across languages, and facilitates extension to additional languages. 
+
+\subsubsection{AI Agent Management Layer}
+\label{sec:AI_Agent_Management}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figures/AI_Management_black.png}
+    \caption[Agent Management Layer of the experimental artefact]{Agent Management Layer of the experimental artefact. Participant agents possess memory and a bank balance, while utility agents support experiment execution through response validation and memory summarization. The LLM of both type of AI agents can be configured with all LLMs served through the Gemini, Ollama, OpenAI and OpenRouter API}
+    \label{fig:MAAI_Architecture_Agent}
+\end{figure}
+
+The AI Agent Management layer, depicted in \Cref{fig:MAAI_Architecture_Agent}, implements AI agents in this system. There are two types of AI agents: i) Participant Agents and ii) Utility Agents. Participant AI Agents take part in the experiment and are the focus of this thesis. In contrast, the Utility AI Agents support the execution of the system. The AI agents are implemented using the Python version of the OpenAI Agents Software Development Kit (SDK)~\citep{Openai_2025_agents_python}.
+
+This framework has been chosen because it is open source and contains minimal abstractions. Open source is a hard requirement to ensure transparency and reproducibility. More complex frameworks like LangChain have been avoided because they have many high-level abstractions that increase complexity without providing benefits for this artefact. Industry leaders recommend minimizing abstractions to maintain a clear understanding of the underlying mechanisms~\citep{Anthropic_2024_Building_Agents}. Certain abstractions remain necessary, as the concept of the AI agent itself is an abstraction—precisely, an AI agent is a continuous loop on an LLM as outlined in \Cref{sec:background_MAAI}. The OpenAI Agents SDK provides this minimal abstraction.
+
+Participant AI Agents are instantiated via the SDK’s Agent class. Each agent is assigned a name, which enables referencing during group interaction, and a personality, which specifies the role the agent assumes in the experiment. Both attributes are included in every call to the agent. The role specification is motivated by findings in prompt engineering, where role descriptions have been shown to significantly influence and enhance LLM behavior~\citep{Zhang_et_al_2025_persona_LLM}. 
+
+This artefact utilizes an OpenAI Completions API style endpoint. This API style is widely adopted in industry, making the artifact compatible with a broad range of offerings. Four LLM providers are integrated: OpenAI API, Ollama API, Gemini API, and OpenRouter API. Development primarily relied on the OpenAI API. The Ollama API enables local LLM execution directly on device; however, hardware constraints limited its use beyond a proof of concept validation. Hypothesis 1, 2, and 4 testing employs the Gemini API, with the rationale detailed in \Cref{sec:results}. For Hypothesis~2 the OpenRouter API was used because it enables the use of different LLM providers through a unified account management and billing interface, while providing access to an extensive LLM catalog that, as of October 2025, contains 560 LLMs~\citep{OpenRouter_2025_Models}. LLM identifiers from OpenRouter (for example, ``anthropic/claude-sonnet-4'') can be inserted directly into the configuration file, enabling straightforward model switching. The temperature parameter controls output randomness, ranging from 0 to 2. Deterministic settings (temperature = 0) enable reproducible experimental runs, which is critical for scientific evaluation. When an LLM does not support the temperature parameter, such as GPT-5, the system continues with a terminal warning and logs the condition~\citep{OpenRouter_2025_Models}. Direct usage of the Gemini API and OpenAI API requires inserting the LLM identifier into the configuration file. The Ollama API requires the prefix ``ollama'', for example ``ollama/gemma3:1b''.
+
+% Arugemtn gegen Databases
+% ARgument gegen Simple Chat History
+% Arguemtn für self management 
+% Explain how it works --> Add simple vs. complex 
+Participant AI agents require a memory system to learn and adapt throughout the experiment. Memory management is currently an emergent field in MAAI engineering with no universal solution. For long-term and large-scale information retrieval, systems rely on vector databases like Mem0~\citep{Mem0_2025_Memory}. Implementing such a solution would contradict the design principle of simplicity by introducing unnecessary architectural complexity without realizing the performance benefits that materialize only when dealing with high volumes of relational data.
+At the opposite end of the spectrum lies the insertion of all previous interactions into each agent call. While simple, this approach causes rapid increases in token consumption during experiment execution while LLM performance degrades substantially with increasing context window utilization~\citep{Du_etal_2025_context_length_hurts_llm_performance}.
+To address this challenge, and in accordance with the system's design principles of flexibility, simplicity, and transparency, the artefact implements summarization-based memory. Each interaction is classified into either a complex or simple event type. Simple events do not require post-hoc analysis and include responses to binary questions such as voting intentions or principle choices during the voting process. The outcomes of these simple events are appended directly to the AI agent's memory. In contrast, all other interactions are classified as complex. After each complex interaction, a dedicated memory update call is used to the participant AI agent. This call includes the previous memory entry and the outcome of the interaction. The participant AI agent then returns an updated memory entry for subsequent rounds. Memory is stored as a string with a character-based limit (default: 25,000 characters, approximately 5,300 words assuming 4.7 characters per word). In practice, experimental trials produced substantially smaller entries. If the memory limit is exceeded, the AI agent receives notification that its previous attempt surpassed the limit and is instructed to produce a more concise entry. Should the agent fail to comply, the utility AI agent summarizes the memory to fit within the specified limit. Beyond memory, each participant agent maintains a bank balance. The orchestration layer manages this balance and passes it into prompts at every turn to enable payoff calculations.
+
+The Utility AI agent support the execution of the system by converting the text outputs of the Participant AI agents into structured responses and sending custom error messages to the Participant AI Agents if they provide invalid responses, for example, specifying a negative floor constraint. In contrast to predefined patterns like a Regex algorithm, using Utility AI agents is more robust and simpler to implement because it does not rely on explicitly defined patterns. Given their supporting role as intermediaries between the execution logic of the system and the participant AI agents, they have no memory, name, or personality. They rely on small, cost-efficient models such as ``gemini-2.0-flash lite'' and are executed with temperature set at 0 to ensure reproducibility.
+
+
+
+\subsection{Statistical Testing}
+\label{sec:Statistical_Testing}
+The overall statistical methodology is presented before the exact test formulation for each hypothesis is specified.
+
+\subsubsection{Methodology}
+\label{sec:Statistical_Testing_Overall_Method}
+
+With the exception of Hypothesis~3 all hypotheses posit differences in the distribution of collective choices over justice principles between groups of participants, either AI agents or human participants. The outcome space consists of five mutually exclusive categories that correspond to the four distributive justice principles and a disagreement outcome.
+
+The data for each comparison takes the form of a \(5\times Z\) contingency table, where rows index the five outcome categories and columns index \(Z\) experimental conditions. The cells denote the number of occurrences; each experimental run is treated as an independent realization. For example, Hypothesis~4 evaluates whether input language changes the distribution of choices, which yields a \(5\times 3\) table, whose columns correspond to English, Mandarin, and Spanish.
+
+Throughout the formal hypothesis statements, outcomes are denoted by descriptive labels rather than numeric indices. The five outcome categories are: \textit{Floor} (maximize floor income), \textit{Avg} (maximize average income), \textit{AvgFloor} (maximize average with floor constraint), \textit{AvgRange} (maximize average with range constraint), and \textit{NoAgree} (no agreement reached). Let \(\mathcal{C} = \{\textit{Floor}, \textit{Avg}, \textit{AvgFloor}, \textit{AvgRange}, \textit{NoAgree}\}\) denote the set of possible outcomes.
+
+Hypothesis~3 examines differences in manipulation success rates between AI agents of low and high intelligence. Since there are two possible outcomes, success and failure, and two intelligence conditions,low and high,t he result of this hypothesis is  a \(2\times 2\) contingency table.
+
+For Hypothesis~3, the Fisher test is used~\citep{Fisher_1922_Exact_Test}. For all other hypotheses, an extension of this test for \(X\times Z\) contingency tables, the Fisher Freeman Halton Test (FFH), is employed~\citep{Freeman_Halton_1951_FFH_Test}. Both the Fisher and FFH tests assess the improbability of the observed table relative to the set of all tables that share the observed row and column totals under the null hypothesis of independence, computing a two sided \(p\) value from this exact conditional reference distribution. Because inference relies on the exact finite sample distribution rather than asymptotic approximations, these tests maintain nominal Type I error rates in small or sparse samples, which makes them preferable when conventional large sample conditions are not satisfied~\citep{Agresti_2013_CategoricalData,Fagerland_Lydersen_Laake_2017_Contingency}. The baseline study of~\citet{Frohlich_Oppenheimer_1992_Book} reports very small counts in several categories; small counts are therefore expected in the replication runs and their permutations, which likely violates Cochran's rule for the \(\chi^2\) test (at least 80\% of expected cell counts above 5, none below 1)~\citep{Cochran_1954_ChiSquareRules}. Consequently, the Fisher and FFH tests as exact tests provide superior reliability compared to the \(\chi^2\) approximation.
+
+The FFH analysis is conducted in R using the contingencytables package, which computes the exact FFH by enumeration of all feasible tables with the given margins. Two sided \(p\) values are reported~\citep{Fagerland_2024_contingencytables_R}. If a row contains 0 for all categories, this row is removed because it prohibits the calculation of the FFH.
+
+While the Fisher and FFH tests provide robust significance tests, they do not quantify the strength of association between variables. If the \(p\) value is high, a measure of association is needed to help differentiate between false negative and true negative outcomes. Therefore, Cramér's V is reported to measure the degree of association in contingency tables~\citep{Cramer_1946_Mathematical_Methods}. Because the standard approach derives from the \(\chi^2\) statistic and may be biased in this context, bias corrected bootstrap confidence intervals following~\citet{Bergsma_2013_Bias_Correction_Cramer_V} are applied.
+
+For the Fisher and FFH tests, a significance level of 5\% is used. For effect size, bias corrected Cramér's V is interpreted, with values above 0.3 treated as substantively meaningful. The choice of values and the selection of testing procedures are conservative by design in an effort to reduce the likelihood of a Type I error.
+
+\subsubsection{Hypothesis 1}
+The testing procedure for each hypothesis is outlined beginning with Hypothesis 1, which states:
+\begin{quote}
+``\textbf{Hypothesis 1:} Groups of AI agents in an MAAI exhibit different fairness judgments than groups of humans.''
+\end{quote}
+
+In the original experimental design,~\citet{Frohlich_Oppenheimer_1992_Book} conducted 34 runs. Table~\ref{tab:Frohlich_Oppenheimer_Base_Results} presents the experimental results from the original human study.
+
+\begin{table}[!ht]
+\centering
+\caption[Group choices in \citet{Frohlich_Oppenheimer_1992_Book}]{Group choices for the base scenario in \citet{Frohlich_Oppenheimer_1992_Book}. The maximize average with floor constraint principle was selected by 23 of 34 groups (67.6\%), establishing the baseline for Hypothesis 1.}
+\label{tab:Frohlich_Oppenheimer_Base_Results}
+\begin{tabular}{l r}
+\hline
+\textbf{Principle} & \textbf{Frohlich \& Oppenheimer} \\
+\hline
+Max.\ floor income & 1 \\
+Max.\ average income & 1 \\
+Max.\ average with floor constraint & 23 \\
+Max.\ average with range constraint & 2 \\
+No Agreement & 7 \\
+\hline
+\textbf{Total} & \textbf{34} \\
+\hline
+\end{tabular}
+\end{table}
+
+From a statistical perspective, Hypothesis~1 states that the distributions of choices by human participants and AI agents originate from different underlying distributions. This can be formally expressed as follows.
+
+\textbf{Null hypothesis (\(H_0\)):} 
+The distribution of fairness judgments across the five outcome categories is the same between the MAAI and the human study of~\citet{Frohlich_Oppenheimer_1992_Book}. Formally,
+\[
+H_0:\; P_{\text{MAAI}}(c) = P_{\text{Human}}(c) \quad \forall\, c \in \mathcal{C}.
+\]
+
+\textbf{Alternative hypothesis (\(H_1\)):} 
+At least one outcome category differs between the two distributions. Formally,
+\[
+H_1:\; \exists\, c \in \mathcal{C}\ \text{such that}\ P_{\text{MAAI}}(c) \neq P_{\text{Human}}(c).
+\]
+
+These hypotheses are tested using the FFH and Cramér's V as outlined in the previous section.
+
+\subsubsection{Hypothesis 2}
+In contrast to Hypothesis~1, Hypothesis~2 focuses on the influence of values embedded in the foundation model. It states:
+\begin{quote}
+\textbf{Hypothesis 2:} ``The underlying LLM of an MAAI statistically significantly affects its fairness judgments; specifically, American and Chinese LLMs differ in their judgments.''
+\end{quote}
+
+To test this hypothesis, three configurations of MAAI differing in the origin of their LLM are compared: Chinese, American, and Mixed. The resulting data takes the form of a \(5\times 3\) contingency table. Let \(\mathcal{G} = \{\text{Chinese}, \text{American}, \text{Mixed}\}\) denote the set of LLM origins. The formal definition is
+
+\textbf{Null hypothesis (\(H_0\)):}
+\[
+H_0:\; P_{\text{Chinese}}(c) = P_{\text{American}}(c) = P_{\text{Mixed}}(c) \quad \forall\, c \in \mathcal{C}.
+\]
+
+\textbf{Alternative hypothesis (\(H_1\)):}
+\[
+H_1:\; \exists\, c \in \mathcal{C},\; \exists\, g, g' \in \mathcal{G} \text{ with } g \neq g':\; P_{g}(c) \neq P_{g'}(c).
+\]
+
+The statistical procedure outlined in Section~\ref{sec:Statistical_Testing_Overall_Method} is applied.
+
+\subsubsection{Hypothesis 3}
+\label{sec:stat_test_hyp_3}
+Hypothesis~3 examines the role of intelligence of AI agents, which is rooted in their LLMs. The hypothesis states:
+\begin{quote}
+\textbf{Hypothesis 3:} Smarter agents, powered by more capable LLMs, have a different likelihood of influencing the entire MAAI.
+\end{quote}
+
+The total number of agents is reduced from five to three to give the Manipulator more relative influence and decrease token consumption. One agent takes the role of Manipulator, who is given the least popular principle from the final evaluation of the individual phase at the beginning of the group discussion and is tasked to create consensus on this principle across 10 rounds. Two agents receive a neutral instruction without reference to any principle. A run is counted as a ``success'' if the group ultimately adopts the Manipulator's target; otherwise, it is recorded as a ``failure''.
+
+The Manipulator role is assigned to two different LLMs with varying levels of intelligence. Intelligence is measured by performance on the Artificial Analysis benchmark, which captures reasoning and language understanding abilities beyond factual recall~\citep{ArtificialAnalysis_AI_2025}. Let \(\mathcal{I} = \{\text{Low}, \text{High}\}\) denote the two intelligence categories, and let \(\mathcal{O} = \{\text{Success}, \text{Failure}\}\) denote the binary outcome space.
+
+The resulting data form a \(2\times 2\) contingency table: the two rows capture the binary outcome, and the two columns capture the intelligence levels of the Manipulator. Hypothesis~3 predicts that the probability of manipulation success differs with intelligence. Formally:
+
+\textbf{Null hypothesis (\(H_0\)):}
+\[
+H_0:\; P_{\text{Low}}(\text{Success}) = P_{\text{High}}(\text{Success}).
+\]
+
+\textbf{Alternative hypothesis (\(H_1\)):}
+\[
+H_1:\; P_{\text{Low}}(\text{Success}) \neq P_{\text{High}}(\text{Success}).
+\]
+
+The hypotheses are tested using the Fisher test and Cramér's V, as described in Section~\ref{sec:Statistical_Testing_Overall_Method}.
+
+\subsubsection{Hypothesis 4}
+Hypothesis~4 examines the role of input language:
+\begin{quote}
+\textbf{Hypothesis 4:} Changing the input language from English to Mandarin to Spanish changes the fairness outcomes in statistically significant ways.
+\end{quote}
+
+To test this hypothesis, the experiment is run using identical configurations with differing input languages: English, Mandarin, and Spanish. Apart from the language of the prompts, all experimental parameters remain identical across runs, which ensures that differences in outcomes can be attributed to the input language. Let \(\mathcal{L} = \{\text{English}, \text{Mandarin}, \text{Spanish}\}\) denote the set of input languages.
+
+The resulting data are structured as a \(5\times 3\) contingency table, where the three columns correspond to the input languages. Formally,
+
+\textbf{Null hypothesis (\(H_0\)):}
+\[
+H_0:\; P_{\text{English}}(c) = P_{\text{Mandarin}}(c) = P_{\text{Spanish}}(c) \quad \forall\, c \in \mathcal{C}.
+\]
+
+\textbf{Alternative hypothesis (\(H_1\)):}
+\[
+H_1:\; \exists\, c \in \mathcal{C},\; \exists\, \ell, \ell' \in \mathcal{L} \text{ with } \ell \neq \ell':\; P_{\ell}(c) \neq P_{\ell'}(c).
+\]
+
+The FFH is applied to evaluate statistical significance and Cramér's V is reported to measure the strength of association.
+
+\newpage

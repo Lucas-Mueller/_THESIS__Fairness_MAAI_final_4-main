@@ -1,0 +1,290 @@
+\section{Results}
+\label{sec:results}
+
+This section presents the experimental findings for testing the hypotheses. First, implementation decisions and reproducibility measures are described. Then, detailed results for each hypothesis are reported, examining consensus outcomes, statistical significance, and the dynamics of deliberation that emerge within MAAI.
+
+\subsection{Implementation}
+\label{subsec:Reproducability}
+
+All experiments except those testing Hypothesis~2 exclusively employ Google's LLMs. This choice has been made because Google provided \$300 in Cloud credits that covered the computational costs required for experiments at this scale. Google offers two model families: proprietary models named ``Gemini'' and open-weight models named ``Gemma''. Only the ``Gemini'' models are used because the ``Gemma'' models are not served by the Gemini API.
+
+Reproducibility is central to the scientific method. The artifact developed for this thesis allows control over all sources of randomness through explicit parameters. The assignment of participant agents to their respective classes during the individual and group phase can be controlled via a central seed. If no seed is predetermined, the system randomly generates and stores one in the result log.
+
+The temperature parameter controls the probability distribution behind the token selection. When set to 0, this parameter should ensure that each sequence of input tokens produces identical output tokens. However, API providers do not always adhere to this behavior~\citep{Atil_et_al_2024_nonDeterminism_API_LLM}. During development, tests with the OpenAI API and the GPT-4.1 nano model, as well as with the GPT-120b OSS model served through the OpenRouter API showed different results between runs despite using the same seed and temperature set to 0. This appears to be a widespread issue across multiple providers. In contrast, the Gemini API seems to adhere to the determinism introduced by temperature = 0. To test the determinism of this artifact, a configuration with temperature = 0 for all agents and a fixed seed was executed. The input and output to and from the agents match exactly across each interaction, proving the reproducibility of the presented artifact. The notebook, including all configurations and results, is available on GitHub~\citep{Mueller_2025_Rawls_Github_Repo}.
+
+\subsection{Hypothesis 1}
+\label{subsec:Hyp_1}
+
+Hypothesis 1 examines whether MAAI exhibit different fairness judgments than human groups. The experimental design translates the conditions of the baseline human experiment~\citep{Frohlich_Oppenheimer_1992_Book} as closely as possible into the MAAI context. The configurations mirror the original study closely, employing five participant AI agents to match the five-person setup in the baseline study. The experiment is conducted in English, consistent with the majority of baseline experiments. The AI agents use three LLMs: ``gemini-2.5-pro'', ``gemini-2.5-flash'', and ``gemini-2.5-flash-lite'', representing Google's current models at different price points. LLMs are randomly assigned to participant AI agents.
+
+The temperature parameter is varied to balance reproducibility and diversity. Eleven configurations set temperature to 0, eleven use random temperatures between 0 and 1, and eleven use random temperatures between 0 and 1.5. Values above 1.5 tend to produce very random outcomes during longer token sequences, causing experimental failures. CoT reasoning is enabled for all agents. The AI agents are named ``Agent 1'' through ``Agent 5'' and assigned the personality ``You are an American college student''. The memory limit is set to 25,000 characters, although it is never reached. The income class assignments in the individual phase follow the original values from the baseline study, as described in \Cref{sec:Replication_MAAI_Process}. Group phase class assignment probabilities are set to the same distribution as in the individual phase because the baseline study does not explicitly state them. Similarly, the multiplier for group phase distributions is set randomly between 2 and 6 to ensure significantly higher values because the baseline study only indicates that values are higher without providing exact figures. The maximum number of rounds is set to 10, which balances cost and sufficient deliberation time as development testing showed. All configurations and results are available in the experiment repository~\citep{Mueller_2025_Rawls_Github_Repo}.
+
+\Cref{tab:Results_1_Frohlich_Oppenheimer_vs_MAAI_Results} reports the principle choices. Out of 33 runs, 30 (90.9\%) reach consensus, exceeding the baseline rate of 27 out of 34 groups (79.4\%). Among the consensus outcomes, 29 select the ``maximization of the average with a floor constraint'' principle and one selects the ``maximization of average'' principle. The ``maximization of floor income'' and ``maximization of average with a range constraint'' principles are never chosen. The FFH test, conducted as described in \Cref{sec:Statistical_Testing}, yields a p-value of 0.0331, which is statistically significant at the 5\% level. The null hypothesis is rejected. MAAI exhibit different fairness judgments than human groups in this experimental setting. The bias-corrected Cramér's V is 0.2653, indicating a low effect strength.
+
+\begin{table}[!ht]
+\centering
+\caption[Comparison of principle choices: baseline vs. MAAI]{Comparison of distributive justice principle choices between the baseline study of \citet{Frohlich_Oppenheimer_1992_Book} and MAAI experiments. AI groups demonstrate a higher consensus rate (90.9\% vs. 79.4\%) and stronger preference for the floor constraint principle (29 vs. 23 groups).}
+\label{tab:Results_1_Frohlich_Oppenheimer_vs_MAAI_Results}
+\begin{tabular}{l r r}
+\hline
+\textbf{Principle} & \textbf{Baseline Study} & \textbf{MAAI} \\ 
+\hline
+Max.\ floor income & 1 & 0 \\
+Max.\ average income & 1 & 1 \\
+Max.\ average with floor constraint & 23 & 29 \\
+Max.\ average with range constraint & 2 & 0 \\
+No Agreement & 7 & 3 \\
+\hline
+\textbf{Total} & \textbf{34} & \textbf{33} \\
+\hline
+\end{tabular}
+\end{table}
+
+When the maximize average with a floor constraint principle is selected, the values range from \$1,000 to \$23,000, with an average floor constraint of \$12,328. These values represent yearly incomes and fall significantly below the American poverty threshold of \$15,650 per year for single-income households (except Alaska and Hawaii)~\citep{ASPE_2025_PovertyGuidelines}. \Cref{fig:Results_1_Constraint_Amounts} depicts the distribution.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/Results/1_Floor_Constraint_Amount.png}
+    \caption[Distribution of floor constraint amounts]{Distribution of floor constraint amounts (in dollars of annual income) when MAAI select the maximize average with floor constraint principle. Values range from \$1,000 to \$23,000, with an average of \$12,328.}
+    \label{fig:Results_1_Constraint_Amounts}
+\end{figure}
+
+Looking at the deliberation dynamics, most of the 30 experiments reaching consensus do so between rounds 3 and 5, with round 4 emerging as the most common consensus point (11 occurrences). \Cref{fig:Results_1_Rounds_Histogramm} shows the distribution. At least one run reaches consensus in all rounds except round 1, suggesting that agents require initial discussion before converging on a shared principle.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Figures/Results/1_Rounds_Consensus_histogram.png}
+    \caption[Distribution of consensus rounds for MAAI groups]{Distribution of consensus rounds for MAAI groups. Round 4 is the most frequent consensus point with 11 occurrences. Most experiments reach consensus between rounds 3 and 5, with at least one consensus event occurring in all rounds except round 1.}
+    \label{fig:Results_1_Rounds_Histogramm}
+\end{figure}
+
+The evolution of agent preferences throughout the experiment reveals system dynamics. Each AI agent provides its preference ranking four times: three times before the group discussion and once after. In the initial ranking, the maximize average with a floor constraint principle dominates, with 150 out of 165 agents (90.9\%) favoring it, whereas maximize average ranks second with 15 out of 165 (9.1\%). Maximizing the floor constraint and maximizing the average with a range constraint are never ranked first. In the final ranking, maximize average with a floor constraint remains most popular but decreases to 137 out of 165 agents, a decline of 13. Maximizing the floor becomes second most popular, increasing from 0 to 18 agents. Maximizing the average decreases to 7 agents, a decline of 8, whereas maximizing the average with a range constraint gains minimal support, increasing to 3 agents. \Cref{fig:Results_1_Preference_Change} shows these shifts.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/Results/1_Preference_Change.png}
+    \caption[Preference ranking shifts between initial and final rankings]{Preference ranking shifts between initial and final rankings across all experiments. The vertical axis shows the initial preference, and the horizontal axis shows the final preference. Count difference indicates the frequency of each transition, revealing strong convergence toward maximize average with floor constraint.}
+    \label{fig:Results_1_Preference_Change}
+\end{figure}
+
+Changes in top-ranked principles are highly unequal across income classes. AI agents assigned to the high-income class never change their preference, whereas AI agents assigned to the low-income class do so 80\% of the time. Maximizing the floor is chosen predominantly by agents assigned to low and medium-low income classes, accounting for 15 of the 18 agents who rank this principle first in the final ranking. This pattern indicates that assigned class influences final preference rankings, with higher class assignments corresponding to less frequent preference changes. \Cref{fig:Results_1_Class_Final_Preference} depicts this relationship, showing in both absolute counts (left panel) and relative proportions (right panel) the clear correlation between class assignment and preference stability.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/Results/1_Income_Class_Final_Preference.png}
+    \caption[Income class assignment and preference change]{Relationship between income class assignment and preference change. The left panel shows absolute counts, and the right panel shows relative proportions. A clear correlation emerges: agents assigned to higher income classes maintain their initial preferences (0\% change rate for high-income class), while agents in lower income classes change preferences frequently (80\% change rate for low-income class).}
+    \label{fig:Results_1_Class_Final_Preference}
+\end{figure}
+
+\newpage
+\subsection{Hypothesis 2}
+\label{subsec:Hyp_2}
+Hypothesis 2 examines whether the country of origin of LLMs affects MAAI fairness behavior, requiring LLMs beyond Google's offerings. This hypothesis was funded out of pocket by the author. To reduce costs, configurations are limited to three agents with a budget constraint of \$0.5 per million output tokens. For each group, the three highest-performing LLMs that support the temperature parameter and are available via the OpenRouter API are selected from the Artificial Analysis benchmark~\citep{ArtificialAnalysis_AI_2025}. This benchmark aggregates multiple industry benchmarks and runs them independently of the providers.
+
+The following Chinese LLMs are selected: DeepSeek-V3.2 Experimental (DeepSeek AI), ChatGLM-4.5-Air (Zhipu AI), and Qwen3-Omni 30B A3B (Alibaba). Because American LLMs are slightly more capable as of October 2025, the top three American LLMs are not chosen but rather the three closest to the Chinese LLMs in benchmark scores: gpt-oss-120B high (OpenAI), Grok Code Fast 1 (XAI), and Grok 4-Fast (XAI). Both groups have an average Artificial Analysis index score of 48.67, ensuring comparable intelligence levels. Two sets of 33 configurations are created, one with Chinese and one with American LLMs, using the same configuration metrics as Hypothesis 1 except that the temperature parameter never exceeds 1.0. This restriction is necessary because these lower-capability LLMs produce overly random outputs at higher temperatures, preventing successful interaction. For each configuration index, parameters are randomly varied and LLMs are randomly assigned within each group, but each configuration index maintains the same settings between conditions, differing only in the LLM.
+
+\Cref{tab:Results_2_Chinese_vs_American_LLMs} reports the principle choices. MAAI with American LLMs reach consensus slightly more often than MAAI based on Chinese LLMs, with 29 out of 33 times, while MAAI with Chinese LLMs reach it 27 out of 33 times. 
+
+When consensus is achieved, both groups select the maximize average with a floor constraint principle most often: 15 times for American configurations and 21 for Chinese configurations. The maximize floor constraint principle is considerably more popular among American MAAI, who choose it 14 times, while Chinese MAAI choose it four times. Neither group selects the average with range constraint principle. The FFH test yields a p-value of 0.0248 (2.5\%), which is statistically significant at the 5\% level. The null hypothesis is rejected, establishing that the origin of the LLM significantly affects fairness outcomes even when intelligence levels are comparable. The bias-corrected Cramér's V is 0.3016, indicating a medium effect strength.
+
+\begin{table}[!ht]
+\centering
+\caption[Comparison of principle choices: American vs. Chinese LLMs]{Comparison of distributive justice principle choices between MAAI based on American and Chinese LLMs. The groups differ significantly despite comparable intelligence levels. These LLMs are considerably smaller and less capable than those used in other hypotheses.}
+\label{tab:Results_2_Chinese_vs_American_LLMs}
+\begin{tabular}{l r r}
+\hline
+\textbf{Principle} & \textbf{American LLMs} & \textbf{Chinese LLMs} \\ 
+\hline
+Max.\ floor income & 14 & 4 \\
+Max.\ average income & 0 & 2 \\
+Max.\ average with floor constraint & 15 & 21 \\
+Max.\ average with range constraint & 0 & 0 \\
+No Agreement & 4 & 6 \\
+\hline
+\textbf{Total} & \textbf{33} & \textbf{33} \\
+\hline
+\end{tabular}
+\end{table}
+%Here
+When chosen, the maximize average with a floor constraint principle yields similar values between groups. The average is \$12,953 for American LLMs and \$12,548 for Chinese LLMs. The minimum value is lower for Chinese LLMs (\$9,000) compared to American LLMs (\$11,000), whereas the maximum value is higher for Chinese LLMs (\$15,000) compared to American LLMs (\$14,000). The standard deviation is \$1,499 for Chinese LLMs and \$995 for American LLMs, despite the smaller sample size for American LLMs. \Cref{fig:Results_2_Constraint_Amounts} depicts the distributions.
+
+
+\begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{Figures/Results/2_Floor_Constraint_Amount.png}
+        \label{fig:placeholder}
+        \caption[Distribution of floor constraint amounts by LLM origin]{Distribution of floor constraint amounts by LLM origin when MAAI select the maximize average with floor constraint principle. American LLMs select this principle 15 times (range: \$11,000 to \$14,000, average: \$12,953, standard deviation: \$995), while Chinese LLMs select it 21 times (range: \$9,000 to \$15,000, average: \$12,548, standard deviation: \$1,499).}
+    \label{fig:Results_2_Constraint_Amounts}
+\end{figure}
+
+Discussion length differs significantly between groups, with round 1 emerging as the most common consensus point for American MAAI, which is earlier than in Hypothesis 1 and among Chinese LLM-based MAAI. The latter reach consensus most frequently in round 4, with an average of round 3.81, compared to American LLM-based MAAI, who reach consensus on average in round 3.34. \Cref{fig:Results_2_Discussion_Length_across_country_origin} shows the distribution.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures//Results/2_Discussion_Lenthg_across_country_origin.png}
+    \caption[Distribution of consensus rounds by LLM origin]{Distribution of consensus rounds by LLM origin. Chinese LLM-based MAAI reach consensus later (average round 3.8) than American LLM-based MAAI (average round 3.3). Round 1 is the most common consensus point for American MAAI, while round 4 is most common for Chinese MAAI.}
+    \label{fig:Results_2_Discussion_Length_across_country_origin}
+\end{figure}
+
+Agent preferences differ notably between LLM origins, and \Cref{fig:Results_2_Preference_First_Last} reveals the dynamics. Initially, American agents heavily favor maximizing the floor principle, with 84 out of 99 agents ranking it first, whereas only 14 out of 99 agents initially favor maximizing the average with a floor constraint. By the end of phase 2, this changes slightly. Maximizing the average with a floor constraint becomes more popular, with 28 out of 99 agents, an increase of 14, whereas maximizing the floor loses popularity, declining to 70 out of 99 agents, a decrease of 14. Maximizing the average with a range constraint remains unpopular, with zero agents ranking it as their top principle initially and in the end. Similarly, maximizing the average stays stagnant, with a single out of 99 agents favoring it initially and in the final preference ranking. 
+
+Like the American agents, the Chinese agents initially favor maximizing the floor principle, although less strongly, with 58 out of 99 agents ranking it first. In turn, more Chinese agents initially favor maximizing the average with a floor constraint: 41 out of 99. During the experiment, maximizing the average with a floor constraint increases to 67 out of 99 agents, a gain of 26, whereas maximizing the floor declines to 23 out of 99 agents, a decrease of 35. Maximizing the average gains popularity, increasing to 9 out of 99 agents, whereas maximizing the average with a range constraint remains unpopular, with 0 agents. 
+
+The main difference between American and Chinese agents lies in their preference distribution. American agents concentrate heavily on maximizing the floor principle initially, whereas Chinese agents show more dispersed preferences from the start. Both groups shift from maximizing the floor toward maximizing the average with a floor constraint during deliberation, although the shift is more pronounced among Chinese agents, where the principle loses 43\% compared to 17\% for the American agents. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures//Results/2_Preference_First_Last.png}
+    \caption[Preference shifts by LLM origin]{Preference shifts between initial and final rankings by LLM origin. Count difference indicates movement from initial preference (horizontal) to final preference (vertical). Both groups shift away from maximizing the floor toward maximizing the average with a floor constraint, but American agents show more concentrated initial preferences (85\% initially favor maximize floor) compared to Chinese agents (59\%).}
+    \label{fig:Results_2_Preference_First_Last}
+\end{figure}
+
+\subsection{Hypothesis 3}
+\label{subsec:Hyp_3}
+Hypothesis 3 examines whether intelligence affects the likelihood of influencing the entire MAAI, testing the system dynamics when agents have unequal capabilities. Configurations include two ``regular'' participant agents and one Manipulator agent. The regular agents are instructed to take the role of American college students and are based on the ``Gemini 2.0 flash lite'' model, the least capable currently served LLM in the Gemini API, maximizing the capability gap with the Manipulator agent. The Manipulator agent is instructed to manipulate the group into adopting the least popular justice principle, with the prompt including references to manipulative strategies and rhetorical practices, including logical fallacies. The Manipulator is run with two models: ``Gemini 2.0 flash lite'' (low intelligence group) and ``Gemini 2.5 pro'' (high intelligence group), representing the least and most capable models in the Gemini API, with Artificial Analysis scores of 25 and 60, respectively~\citep{ArtificialAnalysis_AI_2025}.
+
+As outlined in \Cref{sec:stat_test_hyp_3}, three AI agents are used, with two taking the neutral and one taking the manipulator role. Thirty-four runs are executed for both intelligence levels. \Cref{tab:Results_3_Success_Rate_by_intelligence} shows manipulation success rates. Low intelligence manipulators succeed in 1 out of 34 runs, while high intelligence manipulators succeed in 11 out of 34 runs. The Fisher test, conducted as outlined in \Cref{sec:Statistical_Testing}, yields a p-value of 0.0029, which is statistically significant at both the 1\% and 5\% levels. The null hypothesis is rejected, establishing that intelligence level significantly affects AI agents' ability to influence the entire MAAI. The bias-corrected Cramér's V is 0.3274, indicating medium effect strength.
+
+\begin{table}[h!]
+\centering
+\caption[Manipulator success rates by intelligence level]{Comparison of manipulator success rates by intelligence level. High intelligence manipulators (Gemini 2.5 pro) are significantly more successful (33.3\%) than low intelligence manipulators (Gemini 2.0 flash lite, 2.9\%) at influencing MAAI to adopt the least popular principle.}
+\label{tab:Results_3_Success_Rate_by_intelligence}
+\begin{tabular}{lcc}
+\hline
+\textbf{Outcome} & \textbf{Low Intelligence} & \textbf{High Intelligence} \\
+\hline
+Success & 1 & 11 \\
+Failure & 33 & 23 \\
+\hline
+\end{tabular}
+\end{table}
+
+Success rates vary substantially by manipulation target, as shown in \Cref{tab:Results_3_Success_Rate_by_Intelligence_Principle}. The maximize average with floor constraint principle is never a target, confirming its popularity among AI agents, consistent with Hypothesis 1. The maximize average principle is least popular among participant agents, making it the most frequent target: 23 out of 34 attempts for low intelligence and 20 out of 34 for high intelligence manipulators. This is the only successful target for the low intelligence manipulator. The maximize average with range constraint is the second least favored principle, targeted 8 out of 34 times for low intelligence and 12 out of 34 for high intelligence manipulators. This proves hardest to achieve, with a 25\% success rate for high intelligence manipulators compared to 30\% for the maximize average principle. The maximize floor constraint is the second most popular principle and less prevalent as a target: 3 out of 34 for low intelligence and 2 out of 34 for high intelligence manipulators. However, the high intelligence manipulator achieves a 100\% success rate on this principle, demonstrating that its relative popularity makes it easier to sway the group to adopt it.
+
+\begin{table}[h!]
+\centering
+\caption[Manipulation outcomes by intelligence and target principle]{Manipulation outcomes by intelligence level and target principle. The table shows how many times each principle was the least popular (and thus targeted), successful manipulations, and success rates. High intelligence manipulators show substantially higher success rates across all targeted principles.}
+\label{tab:Results_3_Success_Rate_by_Intelligence_Principle}
+\scalebox{0.75}{
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Least Popular Principle} & \multicolumn{3}{c}{\textbf{Low Intelligence}} & \multicolumn{3}{c}{\textbf{High Intelligence}} \\
+\cline{2-7}
+ & \textbf{Attempted} & \textbf{Successful} & \textbf{Success Rate} & \textbf{Attempted} & \textbf{Successful} & \textbf{Success Rate} \\
+\hline
+Max.\ Avg.\ + Floor & 0 & 0 & --- & 0 & 0 & --- \\
+Max.\ Avg.\ Income & 23 & 1 & 4\% & 20 & 6 & 30\% \\
+Max.\ Avg.\ + Range & 8 & 0 & 0\% & 12 & 3 & 25\% \\
+Max.\ Floor & 3 & 0 & 0\% & 2 & 2 & 100\% \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+To better understand manipulation effectiveness beyond simple success rates, comparing principle rankings before and after group discussion helps separate genuine preference shifts from mere tactical votes. \Cref{tab:Results_3_Manipulation_Effect_on_Preference} shows the rank of the target principle (the least popular among non-manipulator agents) before and after group discussion. Low intelligence manipulators shift the rank of the least popular principle by 0.68 positions on average in unsuccessful runs and by one position in the successful run. Even in the successful manipulation, the chosen principle ranks second and third among participant agents, raising questions about voting consistency and demonstrating limited manipulative effectiveness.
+
+High intelligence manipulators shift preferences considerably more. In successful runs, they shift the least favored principle by 2.32 ranks on average, making it rank 1.41 on average, often becoming a favorite among participant agents. This indicates votes are based on genuine conviction rather than mere tactical maneuvering. Even in unsuccessful runs, high intelligence manipulators improve the target principle's rank by 1.37 positions, demonstrating effectiveness even when failing to secure group consensus. 
+% Zu wertend --> Discussion: This pattern suggests that high intelligence manipulators genuinely reshape participant agents' preference structures rather than simply tricking them into inconsistent votes.
+
+\begin{table}[h!]
+\centering
+\caption[Average ranks of target principle by outcome and phase]{Average ranks of target principle by outcome and phase, grouped by intelligence level. Differences are calculated as Phase 2 minus Phase 1. Negative differences indicate improvement in rank (moving toward rank 1). High intelligence manipulators achieve substantially larger rank improvements (decrease of 1.43) compared to low intelligence manipulators (decrease of 0.42).}
+\label{tab:Results_3_Manipulation_Effect_on_Preference}
+\begin{tabular}{lcccccc}
+\hline
+ & \multicolumn{3}{c}{\textbf{Low Intelligence}} & \multicolumn{3}{c}{\textbf{High Intelligence}} \\
+\cline{2-7}
+\textbf{Manipulation Outcome} & \textbf{Phase 1} & \textbf{Phase 2} & \textbf{Diff.} & \textbf{Phase 1} & \textbf{Phase 2} & \textbf{Diff.} \\
+\hline
+Successful   & 3.50 & 2.50 & $-1.00$ & 3.73 & 1.41 & $-2.32$ \\
+Unsuccessful & 3.74 & 3.06 & $-0.68$ & 3.65 & 2.28 & $-1.37$ \\
+\hline
+\textbf{Overall (weighted)} & \textbf{3.73} & \textbf{3.04} & \textbf{$-0.69$} & \textbf{3.68} & \textbf{1.99} & \textbf{$-1.69$} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Hypothesis 4}
+\label{subsec:Hyp_4}
+Hypothesis 4 examines whether input language significantly affects fairness outcomes, testing whether cultural or linguistic factors embedded in foundation models influence deliberation. Three sets of 34 configurations are created, following the same criteria as Hypothesis 1, differing only in experiment language: English, Mandarin, and Spanish. The prompt given to participant AI agents is modified from ``You are an American college student'' to ``You are a college student'' to prevent suppositions about American culture from influencing behavior.
+
+\Cref{tab:Principle_Choices_by_Language} reports principle choices and reveals substantial differences. English configurations reach consensus 30 out of 34 times, with all consensus events selecting the maximize average with a floor constraint principle, replicating the pattern from Hypothesis 1. Mandarin configurations show comparable results, reaching consensus 28 out of 34 times. Among these, 27 out of 28 select the maximize average with a floor constraint principle. Notably, the maximize floor constraint principle is chosen once, something that never occurs in English or Spanish configurations. Spanish configurations diverge significantly. Fifteen out of 34 experiments end in no consensus, substantially higher than other languages. When consensus is reached, maximize average with a floor constraint remains most popular, chosen by 17 out of 19 groups. However, maximize average with a range constraint is chosen twice, a result unique to Spanish configurations.
+
+\begin{table}[!ht]
+\centering
+\caption[Principle choices by experiment language]{Comparison of distributive justice principle choices by experiment language. English and Mandarin show similar distributions, while Spanish experiments end more frequently in no agreement (44.1\% vs. 11.8\% for English and 17.6\% for Mandarin) and show greater diversity in principle choices.}
+\label{tab:Principle_Choices_by_Language}
+\begin{tabular}{l r r r}
+\hline
+\textbf{Principle} & \textbf{English} & \textbf{Mandarin} & \textbf{Spanish} \\ 
+\hline
+Max.\ floor income & 0 & 1 & 0 \\
+Max.\ average income & 0 & 0 & 0 \\
+Max.\ average with floor constraint & 30 & 27 & 17 \\
+Max.\ average with range constraint & 0 & 0 & 2 \\
+No Agreement & 4 & 6 & 15 \\
+\hline
+\textbf{Total} & \textbf{34} & \textbf{34} & \textbf{34} \\
+\hline
+\end{tabular}
+\end{table}
+
+The FFH test yields a p-value of 0.0022 (0.22\%), which is statistically significant at both the 1\% and 5\% levels. The null hypothesis is rejected, establishing that changing the input language significantly affects fairness outcomes. The bias-corrected Cramér's V is 0.2443, indicating low effect strength. Pairwise comparisons between languages, shown in \Cref{tab:Cross-Comparison-Lang}, provide additional insight. The difference between Mandarin and English is not significant at the 5\% level (p-value: 0.5118), while both other comparisons are significant. This indicates that Spanish configuration results drive the rejection of the null hypothesis, while English and Mandarin configurations produce statistically indistinguishable outcomes.
+
+\begin{table}[!ht]
+\centering
+\caption[Pairwise Comparison of FFH p-values between languages]{FFH p-values for pairwise language comparisons. Mandarin and English results do not differ significantly, while Spanish results differ significantly from both other languages.}
+
+\label{tab:Cross-Comparison-Lang}
+\begin{tabular}{l r r r}
+\hline
+ & \textbf{English} & \textbf{Mandarin} & \textbf{Spanish} \\
+\hline
+\textbf{English}  & N/A & 0.5118 & 0.0016 \\
+\textbf{Mandarin}  & 0.5118 & N/A & 0.0120 \\
+\textbf{Spanish}  & 0.0016 & 0.0120 & N/A \\
+\hline
+\end{tabular}
+\end{table}
+
+The maximize average with a floor constraint principle is most popular across all languages, but selected values diverge notably. Across all languages, the average constraint is \$14,401. Mandarin runs yield the lowest average (\$13,074), while Spanish runs yield the highest (\$16,895), driven by one agreement of \$48,000. Spanish runs show notably higher variability, with a standard deviation of \$10,027, more than double that of English (\$4,653) and almost double that of Mandarin (\$5,600). While this is expected given the principle is chosen least frequently in Spanish configurations, the magnitude is striking. \Cref{tab:language_stats} presents the statistical summary.
+
+\begin{table}[h!]
+\centering
+\caption[Floor constraint values by language]{Statistical summary of floor constraint values by language. Spanish experiments show substantially higher variability (standard deviation: \$10,027) and average values (\$16,895) compared to English (standard deviation: \$4,653, average: \$14,017) and Mandarin experiments (standard deviation: \$5,600, average: \$13,074).}
+\label{tab:language_stats}
+\begin{tabular}{lrrrr}
+\hline
+\textbf{Language} & \textbf{Average} & \textbf{Minimum} & \textbf{Maximum} & \textbf{Std.\ Dev.} \\
+\hline
+English        & \$14,017 & \$1,000  & \$25,000 & \$4,653 \\
+Mandarin       & \$13,074 & \$10,000 & \$40,000 & \$5,600 \\
+Spanish        & \$16,895 & \$9,000  & \$48,000 & \$10,027 \\
+\hline
+\textbf{All Languages} & \textbf{\$14,401} & \textbf{\$1,000} & \textbf{\$48,000} & \textbf{\$6,756} \\
+\hline
+\end{tabular}
+\end{table}
+
+Discussion length varies across languages, with round 4 emerging as the most common consensus point across all languages, consistent with Hypothesis 1. However, the pace of reaching consensus differs notably. Mandarin experiments reach consensus earliest, with 18 out of 34 reaching consensus by round 4. English experiments reach this point by round 5 (18 out of 34). Spanish experiments lag substantially: Only 10 out of 34 reach consensus by round 5. Spanish consensus events are more evenly distributed across rounds, with at least one run reaching consensus in all rounds from 4 to 10, whereas no English or Mandarin runs reach consensus in rounds 7 or 8. This pattern suggests that Spanish-language deliberations encounter more persistent disagreements that require extended discussion to resolve, when they can be resolved at all. \Cref{fig:Results_6_Discussion_Length_across_languages} illustrates these distributions.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures//Results/6_Discussion_Lenthg_across_languages.png}
+    \caption[Distribution of consensus rounds by language]{Distribution of consensus rounds by language. Round 4 is the most common consensus point across all languages. Mandarin experiments reach consensus earliest (18 of 34 by round 4), English experiments follow (18 of 34 by round 5), while Spanish experiments show more even distribution across rounds and reach consensus later (10 of 34 by round 5), with consensus events occurring in all rounds from 4 to 10.}
+    \label{fig:Results_6_Discussion_Length_across_languages}
+\end{figure}
+
+Agent preferences differ substantially between languages in both initial distributions and evolution, as shown in \Cref{fig:Results_6_Preference_First_Last}. In initial polling, maximize average with a floor constraint dominates across languages but to varying degrees. English shows the highest initial concentration, with 147 out of 170 agents (86.5\%), Mandarin shows lower concentration, with 137 out of 170 (80.6\%), whereas Spanish shows the lowest, with 107 out of 170 (62.9\%). The maximize average principle is considerably more popular initially among English agents: 18 out of 170 (10.6\%), compared to 2 out of 170 (1.2\%) for Mandarin and 3 out of 170 (1.8\%) for Spanish.
+
+The maximize average with range constraint shows striking language dependence. It is quite popular among Spanish agents, with 58 out of 170 (34.1\%) initially favoring it, far exceeding English (2 out of 170, 1.2\%) and Mandarin (0 out of 170, 0\%). This popularity aligns with Spanish MAAI selecting this principle in consensus twice, the only language to do so. The maximize floor principle shows different patterns: English and Spanish agents rarely choose it (3 out of 170 and 2 out of 170, respectively), whereas Mandarin agents choose it substantially more (31 out of 170, 18.2\%). This aligns with Mandarin MAAI being the only group to select this principle in consensus.
+
+During deliberation, preferences shift toward maximize average with floor constraint across all languages: English increases to 155 out of 170 (an increase of 8 agents), Mandarin increases to 145 out of 170 (an increase of 8 agents), and Spanish increases to 116 out of 170 (an increase of 9 agents). This convergence pattern emerges despite divergent initial preferences and different consensus success rates, suggesting that deliberation itself has a homogenizing effect on preferences, though this effect is insufficient to overcome Spanish configurations' difficulty in reaching final consensus.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures//Results/6_Preference_First_Last.png}
+    \caption[Preference shifts by language]{Preference shifts between initial and final rankings by language. All languages show convergence toward maximize average with floor constraint during deliberation, but Spanish agents exhibit more diverse initial preferences and maintain greater diversity throughout. English agents show the highest initial concentration (86.5\% favor maximize average with floor), followed by Mandarin (80.6\%), and Spanish (62.9\%).}
+    \label{fig:Results_6_Preference_First_Last}
+\end{figure}
+
